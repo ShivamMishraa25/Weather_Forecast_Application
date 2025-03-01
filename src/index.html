@@ -7,7 +7,54 @@
     <title>Document</title>
 </head>
 <body>
-    <header class=""></header>
+    <header class="bg-gray-800 py-6">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex-shrink-0 ml-4 md:ml-8">
+                <img src="img/logo.png" alt="Logo" class="h-12 md:h-16 w-auto">
+            </div>
+            <div class="flex-grow">
+                <div class="text-center md:mr-24">
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-white max-[400px]:text-2xl">Weather Forecast</h1>
+                </div>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none mr-4">
+                <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                    <path id="hamburger-open" fill-rule="evenodd" clip-rule="evenodd" d="M4 6H20V8H4V6ZM4 11H20V13H4V11ZM4 16H20V18H4V16Z"/>
+                    <path id="hamburger-close" fill-rule="evenodd" clip-rule="evenodd" d="M18.707 18.707a1 1 0 0 1-1.414 0L12 13.414l-5.293 5.203a1 1 0 0 1-1.414-1.414L10.586 12 5.293 6.707a1 1 0 0 1 1.414-1.414L12 10.586l5.293-5.293a1 1 0 0 1 1.414 1.414L13.414 12l5.293 5.293a1 1 0 0 1 0 1.414z" class="hidden"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+    
+    <nav class="relative isolate hidden md:flex items-center gap-x-6 overflow-hidden bg-pink-100 px-6 sm:px-3.5 sm:before:flex-1 rounded-lg">
+        <div class="absolute top-1/2 left-[max(-7rem,calc(50%-52rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl" aria-hidden="true">
+            <div class="aspect-577/310 w-[36.0625rem] bg-linear-to-r from-[#ff4f98] to-[#5144ff] opacity-100" style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)"></div>
+        </div>
+        <div class="absolute top-1/2 left-[max(45rem,calc(50%+8rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl" aria-hidden="true">
+            <div class="aspect-577/310 w-[36.0625rem] bg-linear-to-r from-[#ff539b] to-[#4c40ff] opacity-100" style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)"></div>
+        </div>
+        <div class="container mx-auto flex justify-center space-x-4">
+            <a href="#" class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Home</a>
+            <a href="#" class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Forecast</a>
+            <a href="#" class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">About</a>
+            <a href="#" class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Contact</a>
+        </div>
+    </nav>
+    
+    <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 text-white p-4">
+        <div class="container mx-auto">
+            <a href="#" class="block py-2 hover:text-gray-300">Home</a>
+            <a href="#" class="block py-2 hover:text-gray-300">Forecast</a>
+            <a href="#" class="block py-2 hover:text-gray-300">About</a>
+            <a href="#" class="block py-2 hover:text-gray-300">Contact</a>
+        </div>
+    </nav>
+
+    
+    
+    <main class="min-h-screen bg-cover bg-fixed bg-no-repeat" style="background-image: url('your-background-image.jpg');">
+    </main>
+    
 
 
 
