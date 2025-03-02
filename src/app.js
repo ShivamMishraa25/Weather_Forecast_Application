@@ -1,7 +1,7 @@
-// 📌 API Key
+//  API Key
 const apiKey = "0555abec5427964bd5af58a8734bb66d"; 
 
-// 📌 Elements
+//  Elements
 const searchInput = document.getElementById("input");
 const searchButton = document.getElementById("searchButton");
 const locationButton = document.getElementById("locationButton");
@@ -10,7 +10,7 @@ const extendedForecastBtn = document.getElementById("extendedForecastBtn");
 const mainSection = document.getElementById("main");
 const forecastContainers = document.querySelectorAll("#weatherContainer");
 
-// 📌 Burger Menu for Mobile
+//  Burger Menu for Mobile
 const mobileMenuButton = document.getElementById('mobile-menu-button');
 const mobileMenu = document.getElementById('mobile-menu');
 const hamburgerOpen = document.getElementById('hamburger-open');
@@ -22,13 +22,13 @@ mobileMenuButton.addEventListener('click', () => {
     hamburgerClose.classList.toggle('hidden');
 });
 
-// 📌 Initially Hide All Weather Sections
+//  Initially Hide All Weather Sections
 weatherContainer.style.display = "none";
 forecastContainers.forEach((container, index) => {
     if (index !== 0) container.style.display = "none";
 });
 
-// 📌 Fetch Weather Data by City Name
+//  Fetch Weather Data by City Name
 async function fetchWeather(city) {
     if (!city) {
         alert("Please enter a city name.");
@@ -58,9 +58,10 @@ async function fetchWeather(city) {
     }
 }
 
-// 📌 Update Current Weather UI
+//  Update Current Weather UI
 function updateWeatherUI(data) {
-    document.getElementById("weatherDate").textContent = new Date().toDateString();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById("weatherDate").textContent = new Date().toLocaleDateString(undefined, options);
     document.getElementById("weatherIcon").src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
     document.getElementById("weather").textContent = data.weather[0].main;
     document.getElementById("weatherDetails").innerHTML = `
@@ -77,7 +78,7 @@ function updateWeatherUI(data) {
     weatherContainer.style.display = "block";
 }
 
-// 📌 Change Background Based on Weather Condition
+//  Change Background Based on Weather Condition
 function changeBackground(weather) {
     let bgImage = "img/sunny.gif"; // Default to sunny
     if (weather.toLowerCase().includes("rain")) {
@@ -88,7 +89,7 @@ function changeBackground(weather) {
     mainSection.style.backgroundImage = `url('${bgImage}')`;
 }
 
-// 📌 Fetch 5-Day Forecast
+//  Fetch 5-Day Forecast
 async function fetchForecast(city) {
     try {
         const response = await fetch(
@@ -108,7 +109,7 @@ async function fetchForecast(city) {
     }
 }
 
-// 📌 Update 5-Day Forecast UI
+//  Update 5-Day Forecast UI
 function updateForecastUI(forecastList) {
     let index = 1;
     for (let i = 0; i < forecastList.length; i += 8) { // 8 items per day
@@ -117,7 +118,8 @@ function updateForecastUI(forecastList) {
         let forecast = forecastContainers[index];
         let dailyData = forecastList[i];
 
-        forecast.querySelector("#weatherDate").textContent = new Date(dailyData.dt * 1000).toDateString();
+        const options = { weekday: 'long' };
+        forecast.querySelector("#weatherDate").textContent = new Date(dailyData.dt * 1000).toLocaleDateString(undefined, options);
         forecast.querySelector("#weatherIcon").src = `https://openweathermap.org/img/wn/${dailyData.weather[0].icon}@2x.png`;
         forecast.querySelector("#weather").textContent = dailyData.weather[0].main;
         forecast.querySelector("#weatherDetails").innerHTML = `
@@ -130,12 +132,12 @@ function updateForecastUI(forecastList) {
     }
 }
 
-// 📌 Scroll to Weather Section
+//  Scroll to Weather Section
 function scrollToWeather() {
     weatherContainer.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-// 📌 Handle Search Button Click
+//  Handle Search Button Click
 searchButton.addEventListener("click", () => {
     const city = searchInput.value.trim();
     if (!city) {
@@ -145,7 +147,7 @@ searchButton.addEventListener("click", () => {
     fetchWeather(city);
 });
 
-// 📌 Allow Searching by Pressing "Enter" Key
+//  Allow Searching by Pressing "Enter" Key
 searchInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         const city = searchInput.value.trim();
@@ -157,7 +159,7 @@ searchInput.addEventListener("keydown", (event) => {
     }
 });
 
-// 📌 Handle "Use Current Location" Button
+//  Handle "Use Current Location" Button
 locationButton.addEventListener("click", () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -196,7 +198,7 @@ locationButton.addEventListener("click", () => {
     }
 });
 
-// 📌 Show/Hide Extended Forecast
+//  Show/Hide Extended Forecast
 let isExtended = false;
 extendedForecastBtn.addEventListener("click", () => {
     if (!isExtended) {
@@ -211,6 +213,7 @@ extendedForecastBtn.addEventListener("click", () => {
             }
         });
         extendedForecastBtn.textContent = "Close Extended Forecast";
+        extendedForecastBtn.style.whiteSpace = "nowrap"; // Prevent text wrapping
     } else {
         weatherContainer.style.transform = "translateX(0)";
         forecastContainers.forEach((container, index) => {
@@ -223,6 +226,6 @@ extendedForecastBtn.addEventListener("click", () => {
             }
         });
         extendedForecastBtn.textContent = "See Extended Forecast";
-    }
+            }
     isExtended = !isExtended;
 });
