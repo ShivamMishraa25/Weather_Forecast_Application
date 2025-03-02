@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="output.css" rel="stylesheet">
     <title>Document</title>
 </head>
+
 <body>
     <header class="bg-gray-800 py-6">
         <div class="container mx-auto flex items-center justify-between">
@@ -14,33 +16,48 @@
             </div>
             <div class="flex-grow">
                 <div class="text-center md:mr-24">
-                    <h1 class="text-3xl md:text-4xl font-extrabold text-white max-[400px]:text-2xl">Weather Forecast</h1>
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-white max-[400px]:text-2xl">Weather Forecast
+                    </h1>
                 </div>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none mr-4">
                 <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-                    <path id="hamburger-open" fill-rule="evenodd" clip-rule="evenodd" d="M4 6H20V8H4V6ZM4 11H20V13H4V11ZM4 16H20V18H4V16Z"/>
-                    <path id="hamburger-close" fill-rule="evenodd" clip-rule="evenodd" d="M18.707 18.707a1 1 0 0 1-1.414 0L12 13.414l-5.293 5.203a1 1 0 0 1-1.414-1.414L10.586 12 5.293 6.707a1 1 0 0 1 1.414-1.414L12 10.586l5.293-5.293a1 1 0 0 1 1.414 1.414L13.414 12l5.293 5.293a1 1 0 0 1 0 1.414z" class="hidden"/>
+                    <path id="hamburger-open" fill-rule="evenodd" clip-rule="evenodd"
+                        d="M4 6H20V8H4V6ZM4 11H20V13H4V11ZM4 16H20V18H4V16Z" />
+                    <path id="hamburger-close" fill-rule="evenodd" clip-rule="evenodd"
+                        d="M18.707 18.707a1 1 0 0 1-1.414 0L12 13.414l-5.293 5.203a1 1 0 0 1-1.414-1.414L10.586 12 5.293 6.707a1 1 0 0 1 1.414-1.414L12 10.586l5.293-5.293a1 1 0 0 1 1.414 1.414L13.414 12l5.293 5.293a1 1 0 0 1 0 1.414z"
+                        class="hidden" />
                 </svg>
             </button>
         </div>
     </header>
-    
-    <nav class="relative isolate hidden md:flex items-center gap-x-6 overflow-hidden bg-pink-100 px-6 sm:px-3.5 sm:before:flex-1 rounded-lg">
-        <div class="absolute top-1/2 left-[max(-7rem,calc(50%-52rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl" aria-hidden="true">
-            <div class="aspect-577/310 w-[36.0625rem] bg-linear-to-r from-[#ff4f98] to-[#5144ff] opacity-100" style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)"></div>
+
+    <nav
+        class="relative isolate hidden md:flex items-center gap-x-6 overflow-hidden bg-pink-100 px-6 sm:px-3.5 sm:before:flex-1 rounded-lg">
+        <div class="absolute top-1/2 left-[max(-7rem,calc(50%-52rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl"
+            aria-hidden="true">
+            <div class="aspect-577/310 w-[36.0625rem] bg-linear-to-r from-[#ff4f98] to-[#5144ff] opacity-100"
+                style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)">
+            </div>
         </div>
-        <div class="absolute top-1/2 left-[max(45rem,calc(50%+8rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl" aria-hidden="true">
-            <div class="aspect-577/310 w-[36.0625rem] bg-linear-to-r from-[#ff539b] to-[#4c40ff] opacity-100" style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)"></div>
+        <div class="absolute top-1/2 left-[max(45rem,calc(50%+8rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl"
+            aria-hidden="true">
+            <div class="aspect-577/310 w-[36.0625rem] bg-linear-to-r from-[#ff539b] to-[#4c40ff] opacity-100"
+                style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)">
+            </div>
         </div>
         <div class="container mx-auto flex justify-center space-x-4">
-            <a href="#" class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Home</a>
-            <a href="#" class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Forecast</a>
-            <a href="#" class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">About</a>
-            <a href="#" class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Contact</a>
+            <a href="#"
+                class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Home</a>
+            <a href="#"
+                class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Forecast</a>
+            <a href="#"
+                class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">About</a>
+            <a href="#"
+                class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Contact</a>
         </div>
     </nav>
-    
+
     <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 text-white p-4">
         <div class="container mx-auto">
             <a href="#" class="block py-2 hover:text-gray-300">Home</a>
@@ -50,15 +67,215 @@
         </div>
     </nav>
 
-    
-    
-    <main class="min-h-screen bg-cover bg-fixed bg-no-repeat" style="background-image: url('your-background-image.jpg');">
+
+
+    <main class="min-h-screen bg-cover bg-fixed bg-no-repeat flex flex-col items-center p-4"
+        style="background-image: url('img/rainy.gif');">
+        <h1 class="text-4xl font-bold text-white mb-8 mt-8 text-center drop-shadow-lg">Get Weather</h1>
+        <div
+            class="bg-white/10 backdrop-blur-lg rounded-lg p-6 sm:p-8 w-full sm:w-96 border border-white/30 mb-8 sm:mb-16">
+            <div class="flex items-center mb-4">
+                <input type="text" placeholder="Search for cities"
+                    class="flex-grow bg-transparent border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:border-blue-500 text-white placeholder-gray-400 transition-colors duration-300 hover:bg-gray-800 hover:border-pink-500">
+                <button
+                    class="bg-blue-500 hover:bg-blue-600 text-white rounded-r-md px-4 py-2.5 focus:outline-none h-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            <div class="text-center mb-4 text-white">
+                or
+            </div>
+            <button class="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 focus:outline-none">
+                Use Current Location
+            </button>
+        </div>
+
+        <div class="flex flex-col sm:flex-row px-8 gap-6">
+            <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
+                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
+                    25 June 2024
+                </h2>
+                <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
+                <p id="weather" class="text-4xl font-bold drop-shadow-md">
+                    Rainy
+                </p>
+                <div id="weatherDetails" class="text-lg text-gray-300 text-left">
+                    <p>temp: xx</p>
+                    <p>Wind: xx</p>
+                    <p>Humidity: xx</p>
+                </div>
+                <button id="extendedForecastBtn" class="mt-6 bg-blue-500/80 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-all duration-300 shadow-lg hover:scale-105">
+                    See Extended Forecast
+                </button>
+            </div>
+        
+            <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
+                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
+                    tuesday
+                </h2>
+                <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
+                <p id="weather" class="text-4xl font-bold drop-shadow-md">
+                    Rainy
+                </p>
+                <div id="weatherDetails" class="text-lg text-gray-300 text-left">
+                    <p>temp: xx</p>
+                    <p>Wind: xx</p>
+                    <p>Humidity: xx</p>
+                </div>
+            </div>
+
+            <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
+                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
+                    wednesday
+                </h2>
+                <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
+                <p id="weather" class="text-4xl font-bold drop-shadow-md">
+                    Rainy
+                </p>
+                <div id="weatherDetails" class="text-lg text-gray-300 text-left">
+                    <p>temp: xx</p>
+                    <p>Wind: xx</p>
+                    <p>Humidity: xx</p>
+                </div>
+            </div>
+
+            <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
+                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
+                    thursday
+                </h2>
+                <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
+                <p id="weather" class="text-4xl font-bold drop-shadow-md">
+                    Rainy
+                </p>
+                <div id="weatherDetails" class="text-lg text-gray-300 text-left">
+                    <p>temp: xx</p>
+                    <p>Wind: xx</p>
+                    <p>Humidity: xx</p>
+                </div>
+            </div>
+
+            <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
+                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
+                    friday
+                </h2>
+                <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
+                <p id="weather" class="text-4xl font-bold drop-shadow-md">
+                    Rainy
+                </p>
+                <div id="weatherDetails" class="text-lg text-gray-300 text-left">
+                    <p>temp: xx</p>
+                    <p>Wind: xx</p>
+                    <p>Humidity: xx</p>
+                </div>
+            </div>
+
+            <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
+                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
+                    saturday
+                </h2>
+                <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
+                <p id="weather" class="text-4xl font-bold drop-shadow-md">
+                    Rainy
+                </p>
+                <div id="weatherDetails" class="text-lg text-gray-300 text-left">
+                    <p>temp: xx</p>
+                    <p>Wind: xx</p>
+                    <p>Humidity: xx</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Weather Section
+        <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg 
+            rounded-lg border border-white/30 text-center shadow-lg 
+            text-white transition-all duration-300 hover:bg-white/20">
+
+            <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
+                25 June 2024
+            </h2>
+
+            <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
+
+            <p id="weather" class="text-4xl font-bold drop-shadow-md">
+                Rainy
+            </p>
+
+            <div id="weatherDetails" class="text-lg text-gray-300 text-left">
+                <p>temp: xx</p>
+                <p>Wind: xx</p>
+                <p>Humidity: xx</p>
+            </div>
+
+            <button id="extendedForecastBtn" class="mt-6 bg-blue-500/80 hover:bg-blue-600 text-white 
+              px-6 py-3 rounded-lg transition-all duration-300 
+              shadow-lg hover:scale-105">
+                See Extended Forecast
+            </button>
+        </div> -->
+
+        <!-- Extended weather section
+        <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg 
+        rounded-lg border border-white/30 text-center shadow-lg 
+        text-white transition-all duration-300 hover:bg-white/20">
+
+            <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
+                25 June 2024
+            </h2>
+
+            <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
+
+            <p id="weather" class="text-4xl font-bold drop-shadow-md">
+                Rainy
+            </p>
+
+            <div id="weatherDetails" class="text-lg text-gray-300 text-left">
+                <p>temp: xx</p>
+                <p>Wind: xx</p>
+                <p>Humidity: xx</p>
+            </div>
+        </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
     </main>
-    
+
 
 
 
 
     <script src="app.js"></script>
 </body>
+
 </html>
