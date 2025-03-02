@@ -1,4 +1,4 @@
-// 📌 API Key (Replace with yours)
+// 📌 API Key
 const apiKey = "0555abec5427964bd5af58a8734bb66d"; 
 
 // 📌 Elements
@@ -9,6 +9,18 @@ const weatherContainer = document.getElementById("weatherContainer");
 const extendedForecastBtn = document.getElementById("extendedForecastBtn");
 const mainSection = document.getElementById("main");
 const forecastContainers = document.querySelectorAll("#weatherContainer");
+
+// 📌 Burger Menu for Mobile
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const hamburgerOpen = document.getElementById('hamburger-open');
+const hamburgerClose = document.getElementById('hamburger-close');
+
+mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    hamburgerOpen.classList.toggle('hidden');
+    hamburgerClose.classList.toggle('hidden');
+});
 
 // 📌 Initially Hide All Weather Sections
 weatherContainer.style.display = "none";
@@ -39,6 +51,7 @@ async function fetchWeather(city) {
         console.log("Weather Data:", data);
         updateWeatherUI(data);
         fetchForecast(city);
+        scrollToWeather(); // Scroll down after fetching
     } catch (error) {
         console.error("Error fetching weather data:", error);
         alert("Failed to fetch weather data. Please check your connection.");
@@ -117,6 +130,11 @@ function updateForecastUI(forecastList) {
     }
 }
 
+// 📌 Scroll to Weather Section
+function scrollToWeather() {
+    weatherContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 // 📌 Handle Search Button Click
 searchButton.addEventListener("click", () => {
     const city = searchInput.value.trim();
@@ -125,6 +143,18 @@ searchButton.addEventListener("click", () => {
         return;
     }
     fetchWeather(city);
+});
+
+// 📌 Allow Searching by Pressing "Enter" Key
+searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        const city = searchInput.value.trim();
+        if (!city) {
+            alert("Please enter a city name.");
+            return;
+        }
+        fetchWeather(city);
+    }
 });
 
 // 📌 Handle "Use Current Location" Button
@@ -150,6 +180,7 @@ locationButton.addEventListener("click", () => {
                     console.log("Location Weather Data:", data);
                     updateWeatherUI(data);
                     fetchForecast(data.name);
+                    scrollToWeather(); // Scroll down after fetching
                 } catch (error) {
                     console.error("Error fetching location weather:", error);
                     alert("Could not fetch weather. Try again later.");
