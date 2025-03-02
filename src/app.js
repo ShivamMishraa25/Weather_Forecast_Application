@@ -1,23 +1,7 @@
-// code for burger menu when on mobile
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const hamburgerOpen = document.getElementById('hamburger-open');
-        const hamburgerClose = document.getElementById('hamburger-close');
-    
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            hamburgerOpen.classList.toggle('hidden');
-            hamburgerClose.classList.toggle('hidden');
-        });
+// 📌 API Key (Replace with yours)
+const apiKey = "0555abec5427964bd5af58a8734bb66d"; 
 
-
-
-
-
-
-        const apiKey = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
-
-// Elements
+// 📌 Elements
 const searchInput = document.getElementById("input");
 const searchButton = document.getElementById("searchButton");
 const locationButton = document.getElementById("locationButton");
@@ -26,49 +10,42 @@ const extendedForecastBtn = document.getElementById("extendedForecastBtn");
 const mainSection = document.getElementById("main");
 const forecastContainers = document.querySelectorAll("#weatherContainer");
 
-// Initially hide all weather sections
+// 📌 Initially Hide All Weather Sections
 weatherContainer.style.display = "none";
 forecastContainers.forEach((container, index) => {
     if (index !== 0) container.style.display = "none";
 });
 
-// Fetch weather data
+// 📌 Fetch Weather Data by City Name
 async function fetchWeather(city) {
-    console.log(city);
     if (!city) {
         alert("Please enter a city name.");
         return;
     }
 
     try {
-        // Set timeout for API response
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 8000); // 8 sec timeout
-
+        console.log(`Fetching weather for city: ${city}`);
         const response = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`,
-            { signal: controller.signal }
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
         );
-        clearTimeout(timeout);
 
         if (!response.ok) {
-            throw new Error("City not found!");
+            console.error(`API Error: ${response.status} - ${response.statusText}`);
+            alert("City not found! Please enter a valid city name.");
+            return;
         }
 
         const data = await response.json();
+        console.log("Weather Data:", data);
         updateWeatherUI(data);
-        fetchForecast(city); // Fetch 5-day forecast after current weather
+        fetchForecast(city);
     } catch (error) {
-        if (error.name === "AbortError") {
-            alert("Request timed out. Please check your connection.");
-        } else {
-            alert(error.message);
-        }
         console.error("Error fetching weather data:", error);
+        alert("Failed to fetch weather data. Please check your connection.");
     }
 }
 
-// Update current weather UI
+// 📌 Update Current Weather UI
 function updateWeatherUI(data) {
     document.getElementById("weatherDate").textContent = new Date().toDateString();
     document.getElementById("weatherIcon").src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
@@ -80,16 +57,16 @@ function updateWeatherUI(data) {
         <p>Humidity: ${data.main.humidity}%</p>
     `;
 
-    // Change background based on weather condition
+    // Change Background Based on Weather
     changeBackground(data.weather[0].main);
 
-    // Show today's weather
+    // Show Weather Section
     weatherContainer.style.display = "block";
 }
 
-// Change background based on weather
+// 📌 Change Background Based on Weather Condition
 function changeBackground(weather) {
-    let bgImage = "img/sunny.gif"; // Default
+    let bgImage = "img/sunny.gif"; // Default to sunny
     if (weather.toLowerCase().includes("rain")) {
         bgImage = "img/rainy.gif";
     } else if (weather.toLowerCase().includes("cloud")) {
@@ -98,7 +75,7 @@ function changeBackground(weather) {
     mainSection.style.backgroundImage = `url('${bgImage}')`;
 }
 
-// Fetch 5-day forecast
+// 📌 Fetch 5-Day Forecast
 async function fetchForecast(city) {
     try {
         const response = await fetch(
@@ -106,7 +83,9 @@ async function fetchForecast(city) {
         );
 
         if (!response.ok) {
-            throw new Error("Error fetching forecast.");
+            console.error(`API Error: ${response.status} - ${response.statusText}`);
+            alert("Error fetching forecast data.");
+            return;
         }
 
         const data = await response.json();
@@ -116,11 +95,11 @@ async function fetchForecast(city) {
     }
 }
 
-// Update 5-day forecast UI
+// 📌 Update 5-Day Forecast UI
 function updateForecastUI(forecastList) {
     let index = 1;
     for (let i = 0; i < forecastList.length; i += 8) { // 8 items per day
-        if (index > 5) break; // Only 5 days
+        if (index > 5) break;
 
         let forecast = forecastContainers[index];
         let dailyData = forecastList[i];
@@ -138,36 +117,58 @@ function updateForecastUI(forecastList) {
     }
 }
 
-// Event Listeners
+// 📌 Handle Search Button Click
 searchButton.addEventListener("click", () => {
     const city = searchInput.value.trim();
+    if (!city) {
+        alert("Please enter a city name.");
+        return;
+    }
     fetchWeather(city);
 });
 
+// 📌 Handle "Use Current Location" Button
 locationButton.addEventListener("click", () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             async (position) => {
                 const { latitude, longitude } = position.coords;
-                const response = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
-                );
-                const data = await response.json();
-                updateWeatherUI(data);
-                fetchForecast(data.name);
+                console.log(`User Location: ${latitude}, ${longitude}`);
+
+                try {
+                    const response = await fetch(
+                        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
+                    );
+
+                    if (!response.ok) {
+                        console.error(`API Error: ${response.status} - ${response.statusText}`);
+                        alert("Failed to fetch weather for your location.");
+                        return;
+                    }
+
+                    const data = await response.json();
+                    console.log("Location Weather Data:", data);
+                    updateWeatherUI(data);
+                    fetchForecast(data.name);
+                } catch (error) {
+                    console.error("Error fetching location weather:", error);
+                    alert("Could not fetch weather. Try again later.");
+                }
             },
-            (error) => alert("Failed to get location.")
+            (error) => {
+                console.error("Geolocation Error:", error);
+                alert("Failed to get location. Please enable location access.");
+            }
         );
     } else {
         alert("Geolocation not supported by your browser.");
     }
 });
 
-// Show/hide extended forecast
+// 📌 Show/Hide Extended Forecast
 let isExtended = false;
 extendedForecastBtn.addEventListener("click", () => {
     if (!isExtended) {
-        weatherContainer.style.transform = "translateX(-150px)";
         forecastContainers.forEach((container, index) => {
             if (index !== 0) {
                 container.style.display = "block";
