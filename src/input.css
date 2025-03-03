@@ -14,3 +14,8 @@
 html {
     scroll-behavior: smooth;
 }
+@media (min-width: 640px) and (max-width: 1040px) {
+    #resp {
+        flex-wrap: wrap;
+    }
+}
