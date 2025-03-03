@@ -2,6 +2,7 @@
 const apiKey = "0555abec5427964bd5af58a8734bb66d"; 
 
 //  Elements
+const body = document.querySelector("body");
 const searchInput = document.getElementById("input");
 const searchButton = document.getElementById("searchButton");
 const locationButton = document.getElementById("locationButton");
@@ -110,7 +111,7 @@ function changeBackground(weather) {
     } else if (weather.toLowerCase().includes("cloud")) {
         bgImage = "img/cloudy.gif";
     }
-    mainSection.style.backgroundImage = `url('${bgImage}')`;
+    body.style.backgroundImage = `url('${bgImage}')`;
 }
 
 //  Fetch 5-Day Forecast

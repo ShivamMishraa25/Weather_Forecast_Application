@@ -2,13 +2,28 @@
 <html lang="en">
 
 <head>
+    <!-- meta tags for seo purposes -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="output.css" rel="stylesheet">
-    <title>Document</title>
+    <meta name="description" content="Weather Forecast Application using pure javascript without using any libraries.">
+    <meta name="author" content="Shivam Mishraa">
+    <meta name="keywords"
+        content="weather, weather forecast, javascript application, shivammishraa25, web development, full stack development, mern, web application, website">
+    <meta property="og:image" content="./img/og.png">
+    <meta property="og:image" itemprop="image"
+        content="https://shivammishraa25.github.io/Weather_Forecast_Application/src/img/og.jpg">
+    <meta property="og:type" content="website" />
+    <meta property="og:image:type" content="image/jpg">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+    <!--favicon can be used for SEO-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Weather Forecast Application</title>
+    <link rel="stylesheet" href="output.css">
 </head>
 
-<body>
+<!-- Body -->
+<body class="bg-cover bg-fixed bg-no-repeat" style="background-image: url('img/rainy.gif');">
     <header class="bg-gray-800 py-6">
         <div class="container mx-auto flex items-center justify-between">
             <div class="flex-shrink-0 ml-4 md:ml-8">
@@ -32,8 +47,9 @@
         </div>
     </header>
 
+    <!-- Navigation -->
     <nav
-        class="relative isolate hidden md:flex items-center gap-x-6 overflow-hidden bg-pink-100 px-6 sm:px-3.5 sm:before:flex-1 rounded-lg">
+        class="relative isolate hidden md:flex items-center gap-x-6 overflow-hidden bg-pink-100 px-6 sm:px-3.5 sm:before:flex-1">
         <div class="absolute top-1/2 left-[max(-7rem,calc(50%-52rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl"
             aria-hidden="true">
             <div class="aspect-577/310 w-[36.0625rem] bg-linear-to-r from-[#ff4f98] to-[#5144ff] opacity-100"
@@ -47,14 +63,14 @@
             </div>
         </div>
         <div class="container mx-auto flex justify-center space-x-4">
-            <a href="#"
-                class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Home</a>
-            <a href="#"
-                class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Forecast</a>
-            <a href="#"
-                class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">About</a>
-            <a href="#"
-                class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Contact</a>
+            <a href="https://github.com/ShivamMishraa25/Weather_Forecast_Application" target="_blank"
+                class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Github</a>
+            <a href="https://shivammishraa25.github.io/Weather_Forecast_Application/src/" target="_blank"
+                class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Website</a>
+            <a href="https://shivammishraa25.github.io/portfolio/" target="_blank"
+                class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">Portfolio</a>
+            <a href="https://www.linkedin.com/in/shivam-mishra-b8a5b1211?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"
+                class="px-3 py-1 rounded-md transition-all duration-300 hover:bg-gray-800 hover:text-white hover:scale-110">LinkedIn</a>
         </div>
     </nav>
 
@@ -67,14 +83,11 @@
         </div>
     </nav>
 
-
     <!-- main section -->
-
-    <main class="min-h-screen bg-cover bg-fixed bg-no-repeat flex flex-col items-center p-4"
-        style="background-image: url('img/rainy.gif');" id="main">
+    <main class="min-h-screen flex flex-col items-center p-4" id="main">
         <h1 class="text-4xl font-bold text-white mb-8 mt-8 text-center drop-shadow-lg">Get Weather</h1>
         <div
-            class="bg-white/10 backdrop-blur-lg rounded-lg p-6 sm:p-8 w-full sm:w-96 border border-white/30 mb-8 sm:mb-16">
+            class="bg-white/10 backdrop-blur-lg rounded-lg p-6 sm:p-8 w-full sm:w-96 border border-white/30 mb-4 sm:mb-8">
             <div class="flex items-center mb-4">
                 <input type="text" placeholder="Search for cities" id="input"
                     class="flex-grow bg-transparent border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:border-blue-500 text-white placeholder-gray-400 transition-colors duration-300 hover:bg-gray-800 hover:border-pink-500">
@@ -90,200 +103,86 @@
             <div class="text-center mb-4 text-white">
                 or
             </div>
-            <button id="locationButton" class="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 focus:outline-none">
+            <button id="locationButton"
+                class="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 focus:outline-none">
                 Use Current Location
             </button>
         </div>
 
+        <!-- Recent Searches Dropdown -->
+        <div class="relative w-full sm:w-96 my-1">
+            <select id="recentSearches" class="w-full bg-gray-800 text-white px-4 py-2 rounded-md focus:outline-none">
+                <option value="" disabled selected>Recently Searched Cities</option>
+            </select>
+        </div>
 
         <!-- Loading Spinner -->
         <div id="loadingSpinner" style="display: none;">
             <div class="spinner"></div>
         </div>
-        
 
         <div class="flex flex-col sm:flex-row px-8 gap-6">
-            <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
-                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
-                    25 June 2024
-                </h2>
+            <div id="weatherContainer"
+                class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
+                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md"></h2>
                 <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
-                <p id="weather" class="text-4xl font-bold drop-shadow-md">
-                    Rainy
-                </p>
-                <div id="weatherDetails" class="text-lg text-gray-300 text-left">
-                    <p>temp: xx</p>
-                    <p>Wind: xx</p>
-                    <p>Humidity: xx</p>
-                </div>
-                <button id="extendedForecastBtn" class="mt-6 bg-blue-500/80 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-all duration-300 shadow-lg hover:scale-105">
+                <p id="weather" class="text-4xl font-bold drop-shadow-md"></p>
+                <div id="weatherDetails" class="text-lg text-gray-300 text-left"></div>
+                <button id="extendedForecastBtn"
+                    class="mt-6 bg-blue-500/80 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-all duration-300 shadow-lg hover:scale-105">
                     See Extended Forecast
                 </button>
             </div>
-        
-            <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
-                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
-                    tuesday
-                </h2>
+
+            <div id="weatherContainer"
+                class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
+                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md"></h2>
                 <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
-                <p id="weather" class="text-4xl font-bold drop-shadow-md">
-                    Rainy
-                </p>
-                <div id="weatherDetails" class="text-lg text-gray-300 text-left">
-                    <p>temp: xx</p>
-                    <p>Wind: xx</p>
-                    <p>Humidity: xx</p>
-                </div>
+                <p id="weather" class="text-4xl font-bold drop-shadow-md"></p>
+                <div id="weatherDetails" class="text-lg text-gray-300 text-left"></div>
             </div>
 
-            <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
-                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
-                    wednesday
-                </h2>
+            <div id="weatherContainer"
+                class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
+                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md"></h2>
                 <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
-                <p id="weather" class="text-4xl font-bold drop-shadow-md">
-                    Rainy
-                </p>
-                <div id="weatherDetails" class="text-lg text-gray-300 text-left">
-                    <p>temp: xx</p>
-                    <p>Wind: xx</p>
-                    <p>Humidity: xx</p>
-                </div>
+                <p id="weather" class="text-4xl font-bold drop-shadow-md"></p>
+                <div id="weatherDetails" class="text-lg text-gray-300 text-left"></div>
             </div>
 
-            <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
-                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
-                    thursday
-                </h2>
+            <div id="weatherContainer"
+                class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
+                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md"></h2>
                 <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
-                <p id="weather" class="text-4xl font-bold drop-shadow-md">
-                    Rainy
-                </p>
-                <div id="weatherDetails" class="text-lg text-gray-300 text-left">
-                    <p>temp: xx</p>
-                    <p>Wind: xx</p>
-                    <p>Humidity: xx</p>
-                </div>
+                <p id="weather" class="text-4xl font-bold drop-shadow-md"></p>
+                <div id="weatherDetails" class="text-lg text-gray-300 text-left"></div>
             </div>
 
-            <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
-                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
-                    friday
-                </h2>
+            <div id="weatherContainer"
+                class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
+                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md"></h2>
                 <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
-                <p id="weather" class="text-4xl font-bold drop-shadow-md">
-                    Rainy
-                </p>
-                <div id="weatherDetails" class="text-lg text-gray-300 text-left">
-                    <p>temp: xx</p>
-                    <p>Wind: xx</p>
-                    <p>Humidity: xx</p>
-                </div>
+                <p id="weather" class="text-4xl font-bold drop-shadow-md"></p>
+                <div id="weatherDetails" class="text-lg text-gray-300 text-left"></div>
             </div>
 
-            <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
-                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
-                    saturday
-                </h2>
+            <div id="weatherContainer"
+                class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg rounded-lg border border-white/30 text-center shadow-lg text-white transition-all duration-300 hover:bg-white/20">
+                <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md"></h2>
                 <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
-                <p id="weather" class="text-4xl font-bold drop-shadow-md">
-                    Rainy
-                </p>
-                <div id="weatherDetails" class="text-lg text-gray-300 text-left">
-                    <p>temp: xx</p>
-                    <p>Wind: xx</p>
-                    <p>Humidity: xx</p>
-                </div>
+                <p id="weather" class="text-4xl font-bold drop-shadow-md"></p>
+                <div id="weatherDetails" class="text-lg text-gray-300 text-left"></div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- Weather Section
-        <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg 
-            rounded-lg border border-white/30 text-center shadow-lg 
-            text-white transition-all duration-300 hover:bg-white/20">
-
-            <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
-                25 June 2024
-            </h2>
-
-            <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
-
-            <p id="weather" class="text-4xl font-bold drop-shadow-md">
-                Rainy
-            </p>
-
-            <div id="weatherDetails" class="text-lg text-gray-300 text-left">
-                <p>temp: xx</p>
-                <p>Wind: xx</p>
-                <p>Humidity: xx</p>
-            </div>
-
-            <button id="extendedForecastBtn" class="mt-6 bg-blue-500/80 hover:bg-blue-600 text-white 
-              px-6 py-3 rounded-lg transition-all duration-300 
-              shadow-lg hover:scale-105">
-                See Extended Forecast
-            </button>
-        </div> -->
-
-        <!-- Extended weather section
-        <div id="weatherContainer" class="max-w-3xl mx-auto mt-6 p-6 bg-white/10 backdrop-blur-lg 
-        rounded-lg border border-white/30 text-center shadow-lg 
-        text-white transition-all duration-300 hover:bg-white/20">
-
-            <h2 id="weatherDate" class="text-xl font-semibold drop-shadow-md">
-                25 June 2024
-            </h2>
-
-            <img id="weatherIcon" src="img/rainy.png" alt="Weather Icon" class="mx-auto w-24 my-4 drop-shadow-md">
-
-            <p id="weather" class="text-4xl font-bold drop-shadow-md">
-                Rainy
-            </p>
-
-            <div id="weatherDetails" class="text-lg text-gray-300 text-left">
-                <p>temp: xx</p>
-                <p>Wind: xx</p>
-                <p>Humidity: xx</p>
-            </div>
-        </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
     </main>
 
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-4 mt-1">
+        <p>&copy; Weather Forecast Application. All rights reserved.</p>
+    </footer>
 
-
-
-
-    <script src="app.js"></script>
+    <!-- javascript -->
+    <script src="js/app.js"></script>
 </body>
 
 </html>
