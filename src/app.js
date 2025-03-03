@@ -71,6 +71,8 @@ async function fetchWeather(city) {
         console.log("Weather Data:", data);
         updateWeatherUI(data);
         fetchForecast(city);
+        saveRecentSearch(city); // Save search to local storage
+        updateRecentSearches(); // Refresh the dropdown
         scrollToWeather(); // Scroll down after fetching
     } catch (error) {
         clearTimeout(timeout);
@@ -274,3 +276,41 @@ extendedForecastBtn.addEventListener("click", () => {
             }
     isExtended = !isExtended;
 });
+
+// Save Recent Search to Local Storage
+function saveRecentSearch(city) {
+    let searches = JSON.parse(localStorage.getItem("recentSearches")) || [];
+    if (!searches.includes(city)) {
+        searches.unshift(city);
+        if (searches.length > 5) searches.pop(); // Store only last 5 searches
+        localStorage.setItem("recentSearches", JSON.stringify(searches));
+    }
+}
+
+// Update Recent Searches Dropdown
+function updateRecentSearches() {
+    let searches = JSON.parse(localStorage.getItem("recentSearches")) || [];
+    let recentSearchDropdown = document.getElementById("recentSearches");
+
+    // Clear previous options (keep default one)
+    recentSearchDropdown.innerHTML = `<option value="" disabled selected>Recently Searched Cities</option>`;
+
+    if (searches.length === 0) return; // If no searches, keep only the default
+
+    // Add new search options
+    searches.forEach(city => {
+        let option = document.createElement("option");
+        option.value = city;
+        option.textContent = city;
+        recentSearchDropdown.appendChild(option);
+    });
+
+    // Handle selection change
+    recentSearchDropdown.addEventListener("change", function () {
+        fetchWeather(this.value);
+    });
+}
+
+
+// Load Recent Searches on Page Load
+document.addEventListener("DOMContentLoaded", updateRecentSearches);
