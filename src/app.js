@@ -9,6 +9,7 @@ const weatherContainer = document.getElementById("weatherContainer");
 const extendedForecastBtn = document.getElementById("extendedForecastBtn");
 const mainSection = document.getElementById("main");
 const forecastContainers = document.querySelectorAll("#weatherContainer");
+const loadingSpinner = document.getElementById("loadingSpinner");
 
 //  Burger Menu for Mobile
 const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -28,6 +29,16 @@ forecastContainers.forEach((container, index) => {
     if (index !== 0) container.style.display = "none";
 });
 
+//  Show Loading Spinner
+function showLoadingSpinner() {
+    loadingSpinner.style.display = "block";
+}
+
+//  Hide Loading Spinner
+function hideLoadingSpinner() {
+    loadingSpinner.style.display = "none";
+}
+
 //  Fetch Weather Data by City Name
 async function fetchWeather(city) {
     if (!city) {
@@ -35,11 +46,20 @@ async function fetchWeather(city) {
         return;
     }
 
+    showLoadingSpinner();
+    const timeout = setTimeout(() => {
+        hideLoadingSpinner();
+        alert("Request timed out. Please try again.");
+    }, 10000); // 10 seconds timeout
+
     try {
         console.log(`Fetching weather for city: ${city}`);
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
         );
+
+        clearTimeout(timeout);
+        hideLoadingSpinner();
 
         if (!response.ok) {
             console.error(`API Error: ${response.status} - ${response.statusText}`);
@@ -53,6 +73,8 @@ async function fetchWeather(city) {
         fetchForecast(city);
         scrollToWeather(); // Scroll down after fetching
     } catch (error) {
+        clearTimeout(timeout);
+        hideLoadingSpinner();
         console.error("Error fetching weather data:", error);
         alert("Failed to fetch weather data. Please check your connection.");
     }
@@ -91,10 +113,19 @@ function changeBackground(weather) {
 
 //  Fetch 5-Day Forecast
 async function fetchForecast(city) {
+    showLoadingSpinner();
+    const timeout = setTimeout(() => {
+        hideLoadingSpinner();
+        alert("Request timed out. Please try again.");
+    }, 10000); // 10 seconds timeout
+
     try {
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
         );
+
+        clearTimeout(timeout);
+        hideLoadingSpinner();
 
         if (!response.ok) {
             console.error(`API Error: ${response.status} - ${response.statusText}`);
@@ -105,6 +136,8 @@ async function fetchForecast(city) {
         const data = await response.json();
         updateForecastUI(data.list);
     } catch (error) {
+        clearTimeout(timeout);
+        hideLoadingSpinner();
         console.error("Error fetching forecast data:", error);
     }
 }
@@ -162,15 +195,24 @@ searchInput.addEventListener("keydown", (event) => {
 //  Handle "Use Current Location" Button
 locationButton.addEventListener("click", () => {
     if (navigator.geolocation) {
+        showLoadingSpinner();
         navigator.geolocation.getCurrentPosition(
             async (position) => {
                 const { latitude, longitude } = position.coords;
                 console.log(`User Location: ${latitude}, ${longitude}`);
 
+                const timeout = setTimeout(() => {
+                    hideLoadingSpinner();
+                    alert("Request timed out. Please try again.");
+                }, 10000); // 10 seconds timeout
+
                 try {
                     const response = await fetch(
                         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
                     );
+
+                    clearTimeout(timeout);
+                    hideLoadingSpinner();
 
                     if (!response.ok) {
                         console.error(`API Error: ${response.status} - ${response.statusText}`);
@@ -184,11 +226,14 @@ locationButton.addEventListener("click", () => {
                     fetchForecast(data.name);
                     scrollToWeather(); // Scroll down after fetching
                 } catch (error) {
+                    clearTimeout(timeout);
+                    hideLoadingSpinner();
                     console.error("Error fetching location weather:", error);
                     alert("Could not fetch weather. Try again later.");
                 }
             },
             (error) => {
+                hideLoadingSpinner();
                 console.error("Geolocation Error:", error);
                 alert("Failed to get location. Please enable location access.");
             }
