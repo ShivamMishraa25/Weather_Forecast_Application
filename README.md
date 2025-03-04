@@ -25,5 +25,6 @@ A big thank you to OpenWeatherMap for providing the weather data API.
 
 # Github Link: https://github.com/ShivamMishraa25/Weather_Forecast_Application
 # Github Pages Link: https://shivammishraa25.github.io/Weather_Forecast_Application/src/ (deployed)
+# Live Recording Link: https://drive.google.com/file/d/1zIlKzqtuK3wFMeosLgaWntQt6YgtYrd-/view?usp=drive_link
 
 © Weather Forecast App - Built with passion and JavaScript.
